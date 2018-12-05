@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FilesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FilesController extends AbstractController
@@ -17,6 +18,19 @@ class FilesController extends AbstractController
 
     public function index()
     {
-        return $this->render('files.html.twig', ['content' => $this->filesRepository->getAll()]);
+        return $this->render('index.html.twig', ['keys' => $this->filesRepository->getAll()]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->query->get('query', '');
+
+        return $this->render(
+            'search.html.twig',
+            [
+                'keys' => $this->filesRepository->find($query),
+                'query' => $query
+            ]
+        );
     }
 }
