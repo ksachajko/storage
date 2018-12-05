@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content">
+        {% for file in content.keys %}
+            <div>{{ file }}</div>
+        {% endfor %}
+    </div>
+{% endblock body %}
