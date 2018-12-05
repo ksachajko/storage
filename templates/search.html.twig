@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'common/search_form.html.twig' %}
+    <div class="content">
+        Found files:
+
+        {% include 'common/files_list.html.twig' %}
+    </div>
+{% endblock body %}
