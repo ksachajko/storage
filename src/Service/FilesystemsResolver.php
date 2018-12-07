@@ -20,6 +20,7 @@ class FilesystemsResolver
         $filesystems = [];
 
         foreach ($this->filesystems as $filesystem) {
+            # TODO what should happen when filesystem is not found
             $filesystems[] = $this->mountManager->getFilesystem($filesystem);
         }
 
