@@ -3,19 +3,18 @@
 namespace App\Repository;
 
 use App\Service\FilesystemsResolver;
-use League\Flysystem\Exception;
 use League\Flysystem\Filesystem;
 
 class FilesRepository
 {
-    private $filesystems;
+    private $filesystemsResolver;
 
     public function __construct(FilesystemsResolver $filesystemResolver)
     {
-        $this->filesystems = $filesystemResolver->getFilesystems();
+        $this->filesystemsResolver = $filesystemResolver;
     }
 
-    public function getAll(): array
+    public function findAll(): array
     {
         return $this->find();
     }
@@ -24,14 +23,10 @@ class FilesRepository
     {
         $results = [];
 
-        foreach ($this->filesystems as $filesystem) {
-            try {
-                $filesystemResults = $this->findInFilesystem($filesystem, $query);
+        foreach ($this->filesystemsResolver->getFilesystems() as $filesystem) {
+            $filesystemResults = $this->findInFilesystem($filesystem, $query);
 
-                $results = array_merge($results, $filesystemResults);
-            } catch (\Exception $e) {
-                # TODO log exception
-            }
+            $results = array_merge($results, $filesystemResults);
         }
 
         return $results;
@@ -39,14 +34,17 @@ class FilesRepository
 
     private function findInFilesystem(Filesystem $filesystem, $query): array
     {
-        $contents = $filesystem->listContents();
+        # TODO What should happen on filesystem exception
+        # Example: Remove Google Drive credentials.
+        # You could get HTTP 500 Daily Limit for Unauthenticated Use Exceeded
+        $contents = $filesystem->listContents('', true);
 
         if (!$contents) return [];
 
         if (!$query) return $contents;
 
         return array_filter($contents, function ($item) use ($query) {
-            return strpos($item['basename'], $query) !== false;
+            return $item['type'] !== 'dir' && strpos($item['basename'], $query) !== false;
         });
     }
 }

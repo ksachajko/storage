@@ -18,7 +18,7 @@ class FilesController extends AbstractController
 
     public function index()
     {
-        return $this->render('index.html.twig', ['keys' => $this->filesRepository->getAll()]);
+        return $this->render('index.html.twig', ['keys' => $this->filesRepository->findAll()]);
     }
 
     public function search(Request $request)
