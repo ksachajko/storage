@@ -1,9 +1,0 @@
-knp_gaufrette:
-    stream_wrapper: ~
-    adapters:
-        local_uploads:
-            local:
-                directory: "%kernel.root_dir%/../uploads"
-    filesystems:
-        local_uploads:
-            adapter: local_uploads
