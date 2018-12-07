@@ -9,6 +9,7 @@ parameters:
         - local
         - dropbox
         - google_drive
+    local_files_directory: '%kernel.root_dir%/../uploads'
 
 services:
     # default configuration for services in *this* file

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use League\Flysystem\FilesystemNotFoundException;
 use League\Flysystem\MountManager;
 
 class FilesystemsResolver
@@ -20,8 +21,11 @@ class FilesystemsResolver
         $filesystems = [];
 
         foreach ($this->filesystems as $filesystem) {
-            # TODO what should happen when filesystem is not found
-            $filesystems[] = $this->mountManager->getFilesystem($filesystem);
+            try {
+                $filesystems[] = $this->mountManager->getFilesystem($filesystem);
+            } catch (FilesystemNotFoundException $e) {
+                #TODO What should happen when filesystem was not found?
+            }
         }
 
         return $filesystems;

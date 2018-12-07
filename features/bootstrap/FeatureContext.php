@@ -1,53 +1,34 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * This context class contains the definitions of the steps used by the demo 
- * feature file. Learn how to get started with Behat and BDD on Behat's website.
- * 
- * @see http://behat.org/en/latest/quick_start.html
- */
 class FeatureContext implements Context
 {
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    /**
-     * @var Response|null
-     */
-    private $response;
-
-    public function __construct(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * @Given there are stored files
      */
     public function thereAreStoredFiles()
     {
         $rootPath = dirname(__DIR__) . '/../';
+        $uploadsPath = $rootPath . '/uploads/';
 
         $files = [
-            'avatar-default.jpg',
+            'testpdf.pdf',
             'testimg.jpg'
         ];
 
-        $destinationDir = $rootPath . '/uploads/';
-
-        if (!file_exists($destinationDir)) {
-            mkdir($destinationDir, 0777, true);
-        }
-
+        $assetsPath = $rootPath . 'features/assets/';
         foreach ($files as $file) {
-            copy($rootPath . 'features/assets/' . $file, $destinationDir . $file);
+            copy($assetsPath . $file, $uploadsPath . $file);
         }
+
+        $subdirectory = $uploadsPath . '/folder/';
+
+        if (!file_exists($subdirectory)) {
+            mkdir($subdirectory, 0777, true);
+        }
+
+        $fileName = 'testpdf-subdirectory.pdf';
+        copy($assetsPath . $fileName, $subdirectory . $fileName);
     }
 }
