@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    enabled_filesystems:
+        - local
+        - dropbox
+        - google_drive
 
 services:
     # default configuration for services in *this* file
@@ -29,8 +33,20 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\FilesystemResolver:
+    App\Service\FilesystemsResolver:
         public: true
         arguments:
-            $filesystemMap: '@knp_gaufrette.filesystem_map'
-            $filesystemName: '%env(APP_FILESYSTEM)%'
+            $mountManager: '@oneup_flysystem.mount_manager'
+            $filesystems: '%enabled_filesystems%'
+
+    app.dropbox_client:
+        class: Spatie\Dropbox\Client
+        arguments:
+            - '%env(DROPBOX_TOKEN)%'
+
+    app.adapter.google_drive_adapter:
+        class: App\Adapter\GoogleDriveAdapter
+        arguments:
+            $clientId: '%env(GOOGLE_DRIVE_CLIENT_ID)%'
+            $clientSecret: '%env(GOOGLE_DRIVE_CLIENT_SECRET)%'
+            $refreshToken: '%env(GOOGLE_DRIVE_REFRESH_TOKEN)%'

@@ -101,14 +101,41 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "firebase/php-jwt": {
+        "version": "v5.0.0"
+    },
+    "google/apiclient": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "49c5d7a66d863d28513979bf0666dc77599100c0"
+        }
+    },
+    "google/apiclient-services": {
+        "version": "v0.76"
+    },
+    "google/auth": {
+        "version": "v1.4.0"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
-    "knplabs/gaufrette": {
-        "version": "v0.7.0"
+    "league/flysystem": {
+        "version": "1.0.49"
     },
-    "knplabs/knp-gaufrette-bundle": {
-        "version": "v0.5.3"
+    "masbug/flysystem-google-drive-ext": {
+        "version": "v1.0.1"
     },
     "monolog/monolog": {
         "version": "1.24.0"
@@ -119,6 +146,15 @@
     "ocramius/proxy-manager": {
         "version": "2.0.4"
     },
+    "oneup/flysystem-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0eb87bba411c227da027fe5f7c1dc7954b02f242"
+        }
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -127,6 +163,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
+    },
+    "phpseclib/phpseclib": {
+        "version": "2.0.12"
     },
     "phpspec/php-diff": {
         "version": "v1.1.0"
@@ -143,6 +182,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -151,6 +193,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
     },
     "sebastian/comparator": {
         "version": "2.1.3"
@@ -172,6 +217,12 @@
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
+    },
+    "spatie/dropbox-api": {
+        "version": "1.6.6"
+    },
+    "spatie/flysystem-dropbox": {
+        "version": "1.0.6"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
