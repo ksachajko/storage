@@ -6,7 +6,7 @@ use Masbug\Flysystem\GoogleDriveAdapter as OriginalAdapter;
 
 class GoogleDriveAdapter extends OriginalAdapter
 {
-    public function __construct(string $clientId, string $clientSecret, string $refreshToken)
+    public function __construct(string $clientId, string $clientSecret, string $refreshToken, string $root)
     {
         $client = new \Google_Client();
         $client->setClientId($clientId);
@@ -16,6 +16,6 @@ class GoogleDriveAdapter extends OriginalAdapter
 
         $service = new \Google_Service_Drive($client);
 
-        parent::__construct($service);
+        parent::__construct($service, $root);
     }
 }

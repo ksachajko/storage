@@ -6,11 +6,10 @@ oneup_flysystem:
         dropbox_adapter:
             dropbox:
                 client: app.dropbox_client
-                prefix: ''
+                prefix: '%env(DROPBOX_ROOT_DIRECTORY)%'
         google_drive_adapter:
             custom:
                 service: app.adapter.google_drive_adapter
-
     filesystems:
         local:
             adapter: local_adapter
