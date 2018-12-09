@@ -1,8 +1,11 @@
 Storage - manage your remote filesystems in one place.
 
 ### Installation
+Clone repository:
 
     git clone https://github.com/ksachajko/storage.git
+
+In application dir, run:
      
     composer install
 
@@ -66,7 +69,7 @@ There are many existing adapters. Please refer to the official documentations to
 
 ### Usage
 
-Run built-in web server:
+In application dir, enable built-in web server:
 
     bin/console server:start
 
