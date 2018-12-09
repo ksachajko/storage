@@ -21,6 +21,7 @@ class FilesRepository
 
     public function find(string $query = ''): array
     {
+        #TODO group results by filesystem
         $results = [];
 
         foreach ($this->filesystemsResolver->getFilesystems() as $filesystem) {
@@ -34,10 +35,15 @@ class FilesRepository
 
     private function findInFilesystem(Filesystem $filesystem, $query): array
     {
-        # TODO What should happen on filesystem exception
-        # Example: Remove Google Drive credentials.
-        # You could get HTTP 500 Daily Limit for Unauthenticated Use Exceeded
-        $contents = $filesystem->listContents('', true);
+        $contents = [];
+
+        try {
+            $contents = $filesystem->listContents('', true);
+        } catch (\Exception $e) {
+            # TODO What should happen on filesystem exception
+            # Example: run app without Google Drive credentials
+            # There will be exception: Daily Limit for Unauthenticated Use Exceeded and HTTP 500 response without suppressing
+        }
 
         if (!$contents) return [];
 
